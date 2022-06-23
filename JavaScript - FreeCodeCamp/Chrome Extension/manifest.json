@@ -8,5 +8,8 @@
         "default_popup": "index.html",
         "default_title": "JS Bookmarks",
         "default_icon": "user.png"
-    }
+    },
+    "permissions": [
+        "tabs"
+    ]
 }

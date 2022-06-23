@@ -3,7 +3,8 @@ const bookmarkLink = document.getElementById("bookmark-link")
 const saveButton = document.getElementById("save-btn")
 const bookmarksList = document.getElementById("bookmarks-list")
 const deleteButton = document.getElementById("delete-btn")
-const bookmarksFromLocalStorage = JSON.parse( localStorage.getItem("myBookmarks") )
+const bookmarksFromLocalStorage = JSON.parse( localStorage.getItem("myBookmarks"))
+const tabeButton = document.getElementById("tabe-btn")
 
 // Reading the bookmarks from local storage and render it on screen
 if (bookmarksFromLocalStorage) {
@@ -25,6 +26,15 @@ function render(leads) {
     // append to the <il> Element.
     bookmarksList.innerHTML = listItems;
 }
+
+
+tabeButton.addEventListener("click", function(){    
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
+        myBookmarks.push(tabs[0].url)
+        localStorage.setItem("myBookmarks", JSON.stringify(myBookmarks))
+        render(myBookmarks)
+    }) // end of chrome.tabs.query.
+}) // end of event listener.
 
 
 deleteButton.addEventListener("dblclick", function() {
