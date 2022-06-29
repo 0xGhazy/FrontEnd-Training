@@ -1,0 +1,13 @@
+
+/*
+    I Was created by fs.js module
+*/
+
+Hello world, It's hossam here.
+i hope you all fine and safe.
+
+today i start learning NodeJs and i think it's cool <3.
+
+Hope i have been selected as a developer in this training :')
+
+End of the text
