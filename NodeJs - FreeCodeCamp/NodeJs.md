@@ -73,26 +73,87 @@ Asynchronous functions do not block the execution of the program and each comman
 ## The main difference between local and global packages:
 
 local packages are installed in the directory where you run npm install <package-name>, and they are put in the node_modules folder under this directory
+```bash
+npm i <package-name>
+```
+
 global packages are all put in a single place in your system (exactly where depends on your setup), regardless of where you run npm install -g <package-name>
+```bash
+npm install -g <package-name>
+```
+
+# Day 02: what a long day 😒
+
+## Notes
+- Creating `.gitignore` file to skip node_modules directory content.
+- after downloading project we run `npm install` do download all required files.
+- `npm unstall <package-name>` to uninstall any package 
+
+# Event loop
+The event loop is what allows Node.js to perform non-blocking I/O operations — despite the fact that JavaScript is single-threaded — by offloading operations to the system kernel whenever possible.
+
+it's like main loop in GUI applications that wait for user interactions.
+
+# Asynchronous vs Synchronous programming
+
+## Asynchronous programming
+    Asynchronous programming, conversely, is a multithreaded model that’s most applicable to networking and communications. Asynchronous is a non-blocking architecture, which means it doesn’t block further execution while one or more operations are in progress.
+
+don't wait until some process to finish then call the next one. each process processed when it's possible. Example:
+```js
+// 1st task
+console.log("First Task is done now");
+
+// 2nd Task
+// some time consuming task => downloading file
+console.time()
+let result = 0
+for (let i = 0; i <= 10000000; i++){
+    result += i;
+}
+console.log("Download is finished !!")
+console.timeEnd()
+
+// the 3rd task
+console.log("3rd task is done now");
+```
+## Synchronous programming
+    Synchronous is known as a blocking architecture and is ideal for programming reactive systems. As a single-thread model, it follows a strict set of sequences, which means that operations are performed one at a time, in perfect order. While one operation is being performed, other operations’ instructions are blocked. The completion of the first task triggers the next, and so on.
+`While one operation is being performed, other operations’ instructions are blocked.` :)
+
+```js
+// 1st task
+console.log('first task')
+
+// 3rd task
+// setTimeout == called sync programming.
+setTimeout(() =>{
+    console.log("Guess what? I'm the 3rd task :(")
+}, 0)
+// 2nd task
+console.log("I'm the second task :)")
+```
 
 
+# Events-Driven programming.
+EventEmitter is a class that helps us create a publisher-subscriber pattern in NodeJS.
 
+```js
+// 
+const EventEmitter = require('events')
+// init a new instance of EventEmitter
+const customerEmitter = new EventEmitter()
 
+// LISTEN TO THE `RESPONSE` EVENT AND EXECUTE THE CODE.
+customerEmitter.on('response', () => {
+    // DO CODE HERE :)
+    console.log(`Data resived`)
+})
 
+// PUBLISH A NEW EVENT
+customerEmitter.emit('response')
+```
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Whenever it makes sense for code to SUBSCRIBE to something rather than get a callback from something. The typical use case would be that there's multiple blocks of code in your application that may need to do something when an event happens.
 
 
